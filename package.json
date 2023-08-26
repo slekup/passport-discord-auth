@@ -1,0 +1,46 @@
+{
+  "name": "passport-discord-auth",
+  "version": "0.0.0",
+  "description": "An updated passport authentication strategy for Discord. ",
+  "keywords": [
+    "discord.js",
+    "discord",
+    "utils",
+    "slekup",
+    "nodejs",
+    "utility"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slekup/passport-discord-auth"
+  },
+  "license": "CC-BY-NC-SA-4.0",
+  "author": "Slekup",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "bin": {},
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\"",
+    "lint": "eslint src/**/* --ext .ts && tsc --noEmit",
+    "lint:fix": "eslint --fix src/**/* --ext .ts && tsc --noEmit"
+  },
+  "devDependencies": {
+    "eslint": "^8.44.0",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.6"
+  }
+}
