@@ -39,8 +39,16 @@
     "lint": "eslint src/**/* --ext .ts && tsc --noEmit",
     "lint:fix": "eslint --fix src/**/* --ext .ts && tsc --noEmit"
   },
+  "dependencies": {
+    "passport": "^0.6.0",
+    "passport-oauth": "^1.0.0",
+    "passport-oauth2": "^1.7.0",
+    "util": "^0.12.5"
+  },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.10",
+    "@types/passport": "^1.0.12",
+    "@types/passport-oauth2": "^1.4.12",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.1.0",
     "eslint-config-airbnb-base": "^15.0.0",
