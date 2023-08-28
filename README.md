@@ -42,3 +42,39 @@ import { Strategy } from 'passport-discord-auth';
 // CommonJS
 const { Strategy } = require('passport-discord-auth');
 ```
+
+```ts
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.use(
+  new Strategy(
+    {
+      clientID: 'CLIENT_ID',
+      clientSecret: 'CLIENT_SECRET',
+      callbackURL: 'http://localhost:3000/auth/discord/callback',
+      scope: ['identify', 'guilds'],
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // Do something with the profile
+      done(null, profile);
+    }
+  )
+);
+
+app.get('/auth/discord', passport.authenticate('discord'));
+app.get(
+  '/auth/discord/callback',
+  passport.authenticate('discord', {
+    failureRedirect: '/auth/discord',
+  }),
+  (req, res) => {
+    res.redirect('/');
+  }
+);
+```
