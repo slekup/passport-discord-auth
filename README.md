@@ -4,7 +4,7 @@
 
 ---
 
-<a target="\_blank">Documentation (soon)</a> • <a href="https://discord.gg/p5rxxQN7DT" target="_blank">Discord</a> • <a href="https://github.com/slekup/passport-discord-auth" target="_blank">GitHub</a>
+<a href="https://discord.gg/p5rxxQN7DT" target="_blank">Discord</a> • <a href="https://github.com/slekup/passport-discord-auth" target="_blank">GitHub</a>
 
 ---
 
@@ -19,7 +19,7 @@ An updated passport authentication strategy for Discord.
 
 Passport strategy for authenticating with Discord using the OAuth 2.0 API. This library lets you authenticate using Discord in your Node.js applications. By plugging into Passport, Discord authentication can be easily and unobtrusively integrated into any application or framework that supports Connect-style middleware, including Express.
 
-> **Warning:** This library is still in development and is not ready for production use. There may be breaking changes in the future.
+> **Note:** Feel free to open an issue if you have any questions or need help with anything.
 
 ## Installation
 
@@ -76,5 +76,23 @@ app.get(
   (req, res) => {
     res.redirect('/');
   }
+);
+```
+
+### Scope
+
+```ts
+import { Scope } from 'passport-discord-auth';
+
+// ...
+
+passport.use(
+  new Strategy(
+    {
+      // ...
+      scope: [Scope.Identify, Scope.Guilds, Scope.Email],
+    }
+    // ...
+  )
 );
 ```
