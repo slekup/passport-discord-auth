@@ -1,6 +1,6 @@
 {
   "name": "passport-discord-auth",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "An updated passport authentication strategy for Discord.",
   "keywords": [
     "discord.js",
