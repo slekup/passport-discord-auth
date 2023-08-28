@@ -1,6 +1,6 @@
 {
   "name": "passport-discord-auth",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "An updated passport authentication strategy for Discord.",
   "keywords": [
     "discord.js",
@@ -39,17 +39,26 @@
     "lint": "eslint src/**/* --ext .ts && tsc --noEmit",
     "lint:fix": "eslint --fix src/**/* --ext .ts && tsc --noEmit"
   },
+  "dependencies": {
+    "passport": "^0.6.0",
+    "passport-oauth": "^1.0.0",
+    "passport-oauth2": "^1.7.0",
+    "util": "^0.12.5"
+  },
   "devDependencies": {
-    "eslint": "^8.48.0",
+    "@babel/eslint-parser": "^7.22.10",
+    "@types/passport": "^1.0.12",
+    "@types/passport-oauth2": "^1.4.12",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.1.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.0",
     "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-jsdoc": "^46.5.0",
+    "eslint-plugin-jsdoc": "^46.4.6",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-tsdoc": "^0.2.17",
-    "eslint-prettier": "0.0.0-empty",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.2",
     "rimraf": "^5.0.1",
