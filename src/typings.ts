@@ -226,7 +226,7 @@ export interface DiscordUser {
   /**
    * The user's banner hash.
    * Required scope: `identify`.
-   * @see https://discord.com/developers/docs/reference#image-formatting
+   * @see https://discord.com/developers/docs/resources/user#user-object-user-structure
    * @example 'a_6de1eeba36e97e2cf9e2fgb1ae99c2b3'
    */
   banner?: string | undefined;
@@ -234,6 +234,13 @@ export interface DiscordUser {
    * The user's banner color encoded as an integer representation of hexadecimal color code.
    * Required scope: `identify`.
    * @see https://discord.com/developers/docs/reference#image-formatting
+   * @example 0
+   */
+  banner_color?: number | undefined;
+  /**
+   * The user's banner color encoded as an integer representation of hexadecimal color code.
+   * Required scope: `identify`.
+   * @see https://discord.com/developers/docs/resources/user#user-object-user-structure
    * @example 0
    */
   accent_color?: number | undefined;
