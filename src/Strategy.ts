@@ -1,9 +1,11 @@
+import { Schema } from 'builder-validation';
 import {
   InternalOAuthError,
   Strategy as OAuth2Strategy,
   StrategyOptions as OAuth2StrategyOptions,
   VerifyCallback,
 } from 'passport-oauth2';
+
 import {
   Profile,
   ProfileConnection,
@@ -20,12 +22,21 @@ type VerifyFunction = (
   verified: VerifyCallback
 ) => void;
 
+interface AuthorizationParams {
+  permissions?: string;
+  prompt?: string;
+  disable_guild_select?: string;
+  guild_id?: string;
+}
+
 /**
  * Passport strategy for authenticating with Discord using the OAuth 2.0 API.
  */
 export class Strategy extends OAuth2Strategy {
   public override name = 'discord';
   private scope: ScopeType;
+  private scopeDelay: number;
+  private fetchScopeEnabled: boolean;
 
   /**
    * Passport strategy for authenticating with Discord using the OAuth 2.0 API.
@@ -34,6 +45,62 @@ export class Strategy extends OAuth2Strategy {
    * @throws An `Error`. If the options, especially credentials, are not valid.
    */
   public constructor(options: StrategyOptions, verify: VerifyFunction) {
+    const constructorSchema = new Schema()
+      .addString({
+        name: 'clientId',
+        description: 'The client ID assigned by Discord.',
+        required: true,
+      })
+      .addString({
+        name: 'clientSecret',
+        description: 'The client secret assigned by Discord.',
+        required: true,
+      })
+      .addString({
+        name: 'callbackUrl',
+        description:
+          'The URL to which Discord will redirect the user after granting authorization.',
+        required: true,
+      })
+      .addArray({
+        name: 'scope',
+        description: 'An array of permission scopes to request.',
+        required: true,
+      })
+      .addNumber({
+        name: 'scopeDelay',
+        description:
+          'The delay in milliseconds between requests for the same scope.',
+        required: false,
+      })
+      .addBoolean({
+        name: 'fetchScope',
+        description: 'Whether to fetch data for the specified scope.',
+        required: false,
+      })
+      .addString({
+        name: 'authorizationUrl',
+        description: 'The base URL for OAuth2 authorization.',
+        required: false,
+      })
+      .addString({
+        name: 'tokenUrl',
+        description: 'The base URL for OAuth2 token issuance.',
+        required: false,
+      })
+      .addString({
+        name: 'scopeSeparator',
+        description: 'The separator for the scope values.',
+        required: false,
+      });
+
+    // Validate the constructor against the schema.
+    constructorSchema
+      .validate(options as unknown as Record<string, unknown>)
+      .then((result) => {
+        if (typeof result === 'string') throw new Error(result);
+      });
+
     super(
       {
         clientID: options.clientId,
@@ -49,6 +116,8 @@ export class Strategy extends OAuth2Strategy {
     );
 
     this.scope = options.scope ?? [];
+    this.scopeDelay = options.scopeDelay ?? 0;
+    this.fetchScopeEnabled = options.fetchScope ?? true;
 
     // eslint-disable-next-line no-underscore-dangle
     this._oauth2.useAuthorizationHeaderforGET(true);
@@ -82,6 +151,12 @@ export class Strategy extends OAuth2Strategy {
 
           const json = JSON.parse(body) as Profile;
 
+          // Discord epoch (2015-01-01T00:00:00.000Z)
+          const EPOCH = 1420070400000;
+
+          // Date is bits 22-63
+          const SHIFT = 1 << 22; // eslint-disable-line no-bitwise
+
           profile = {
             provider: 'discord',
             id: json.id,
@@ -102,9 +177,12 @@ export class Strategy extends OAuth2Strategy {
             connections: json.connections,
             guilds: json.guilds,
             fetchedAt: new Date(),
+            createdAt: new Date(+json.id / SHIFT + EPOCH),
             _raw: body,
             _json: json as unknown as Record<string, unknown>,
           };
+
+          if (!this.fetchScopeEnabled) return done(null, profile);
 
           this.fetchScope('connections', accessToken, (err, data) => {
             if (err) return done(err);
@@ -138,29 +216,31 @@ export class Strategy extends OAuth2Strategy {
   ): void {
     if (!this.scope.includes(scope)) return cb(null, null);
 
-    // eslint-disable-next-line no-underscore-dangle
-    this._oauth2.get(
-      `https://discord.com/api/users/@me/${scope}`,
-      accessToken,
-      (err, body) => {
-        if (err)
-          return cb(
-            new InternalOAuthError(`Failed to fetch the scope: ${scope}`, err)
-          );
-
-        try {
-          if (typeof body !== 'string')
+    setTimeout(() => {
+      // eslint-disable-next-line no-underscore-dangle
+      this._oauth2.get(
+        `https://discord.com/api/users/@me/${scope}`,
+        accessToken,
+        (err, body) => {
+          if (err)
             return cb(
-              new Error(`Failed to parse the returned scope data: ${scope}`)
+              new InternalOAuthError(`Failed to fetch the scope: ${scope}`, err)
             );
 
-          const json = JSON.parse(body) as Record<string, unknown>;
-          cb(null, json);
-        } catch (error) {
-          cb(new Error(`Failed to parse the returned scope data: ${scope}`));
+          try {
+            if (typeof body !== 'string')
+              return cb(
+                new Error(`Failed to parse the returned scope data: ${scope}`)
+              );
+
+            const json = JSON.parse(body) as Record<string, unknown>;
+            cb(null, json);
+          } catch (error) {
+            cb(new Error(`Failed to parse the returned scope data: ${scope}`));
+          }
         }
-      }
-    );
+      );
+    }, this.scopeDelay);
   }
 
   /**
@@ -169,11 +249,10 @@ export class Strategy extends OAuth2Strategy {
    * @returns The extra parameters.
    */
   public override authorizationParams(
-    options: Record<string, unknown>
-  ): Record<string, unknown> {
-    const params: Record<string, unknown> = super.authorizationParams(
-      options
-    ) as Record<string, unknown>;
+    options: AuthorizationParams
+  ): AuthorizationParams & Record<string, unknown> {
+    const params: AuthorizationParams & Record<string, unknown> =
+      super.authorizationParams(options) as Record<string, unknown>;
 
     if ('permissions' in options) {
       params.permissions = options.permissions;
@@ -181,6 +260,14 @@ export class Strategy extends OAuth2Strategy {
 
     if ('prompt' in options) {
       params.prompt = options.prompt;
+    }
+
+    if ('disable_guild_select' in options) {
+      params.disable_guild_select = options.disable_guild_select;
+    }
+
+    if ('guild_id' in options) {
+      params.guild_id = options.guild_id;
     }
 
     return params;
