@@ -74,11 +74,37 @@ export class Strategy extends OAuth2Strategy {
           );
         }
 
+        let profile: Profile = {} as Profile;
+
         try {
           if (typeof body !== 'string')
             return done(new Error('Failed to parse the user profile.'));
 
           const json = JSON.parse(body) as Profile;
+
+          profile = {
+            provider: 'discord',
+            id: json.id,
+            username: json.username,
+            displayName: json.displayName,
+            discriminator: json.discriminator,
+            avatar: json.avatar,
+            banner: json.banner,
+            email: json.email,
+            verified: json.verified,
+            mfa_enabled: json.mfa_enabled,
+            access_token: accessToken,
+            public_flags: json.public_flags,
+            flags: json.flags,
+            locale: json.locale,
+            global_name: json.global_name,
+            premium_type: json.premium_type,
+            connections: json.connections,
+            guilds: json.guilds,
+            fetchedAt: new Date(),
+            _raw: body,
+            _json: json as unknown as Record<string, unknown>,
+          };
 
           this.fetchScope('connections', accessToken, (err, data) => {
             if (err) return done(err);
@@ -86,31 +112,7 @@ export class Strategy extends OAuth2Strategy {
             this.fetchScope('guilds', accessToken, (err, data) => {
               if (err) return done(err);
               json.guilds = data as ProfileGuild[];
-
-              const profile: Profile = {
-                provider: 'discord',
-                id: json.id,
-                username: json.username,
-                displayName: json.displayName,
-                discriminator: json.discriminator,
-                avatar: json.avatar,
-                banner: json.banner,
-                email: json.email,
-                verified: json.verified,
-                mfa_enabled: json.mfa_enabled,
-                access_token: accessToken,
-                public_flags: json.public_flags,
-                flags: json.flags,
-                locale: json.locale,
-                global_name: json.global_name,
-                premium_type: json.premium_type,
-                connections: json.connections,
-                guilds: json.guilds,
-                fetchedAt: new Date(),
-                _raw: body,
-                _json: json as unknown as Record<string, unknown>,
-              };
-
+              json.fetchedAt = new Date();
               done(null, profile);
             });
           });
@@ -143,19 +145,44 @@ export class Strategy extends OAuth2Strategy {
       (err, body) => {
         if (err)
           return cb(
-            new InternalOAuthError('Failed to fetch the user profile.', err)
+            new InternalOAuthError(`Failed to fetch the scope: ${scope}`, err)
           );
 
         try {
           if (typeof body !== 'string')
-            return cb(new Error('Failed to parse the user profile.'));
+            return cb(
+              new Error(`Failed to parse the returned scope data: ${scope}`)
+            );
 
           const json = JSON.parse(body) as Record<string, unknown>;
           cb(null, json);
         } catch (error) {
-          cb(new Error('Failed to parse the user profile.'));
+          cb(new Error(`Failed to parse the returned scope data: ${scope}`));
         }
       }
     );
+  }
+
+  /**
+   * Return extra parameters to be included in the authorization request.
+   * @param options The options.
+   * @returns The extra parameters.
+   */
+  public override authorizationParams(
+    options: Record<string, unknown>
+  ): Record<string, unknown> {
+    const params: Record<string, unknown> = super.authorizationParams(
+      options
+    ) as Record<string, unknown>;
+
+    if ('permissions' in options) {
+      params.permissions = options.permissions;
+    }
+
+    if ('prompt' in options) {
+      params.prompt = options.prompt;
+    }
+
+    return params;
   }
 }
