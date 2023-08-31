@@ -151,6 +151,12 @@ export class Strategy extends OAuth2Strategy {
 
           const json = JSON.parse(body) as Profile;
 
+          // Discord epoch (2015-01-01T00:00:00.000Z)
+          const EPOCH = 1420070400000;
+
+          // Date is bits 22-63
+          const SHIFT = 1 << 22; // eslint-disable-line no-bitwise
+
           profile = {
             provider: 'discord',
             id: json.id,
@@ -171,6 +177,7 @@ export class Strategy extends OAuth2Strategy {
             connections: json.connections,
             guilds: json.guilds,
             fetchedAt: new Date(),
+            createdAt: new Date(+json.id / SHIFT + EPOCH),
             _raw: body,
             _json: json as unknown as Record<string, unknown>,
           };

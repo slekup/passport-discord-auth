@@ -203,6 +203,7 @@ export interface Profile extends passport.Profile {
   connections?: ProfileConnection[] | undefined;
   guilds?: ProfileGuild[] | undefined;
   fetchedAt: Date;
+  createdAt: Date;
   _raw: unknown;
   _json: Record<string, unknown>;
 }
