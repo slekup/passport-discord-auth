@@ -20,6 +20,13 @@ type VerifyFunction = (
   verified: VerifyCallback
 ) => void;
 
+interface AuthorizationParams {
+  permissions?: string;
+  prompt?: string;
+  disable_guild_select?: string;
+  guild_id?: string;
+}
+
 /**
  * Passport strategy for authenticating with Discord using the OAuth 2.0 API.
  */
@@ -177,11 +184,10 @@ export class Strategy extends OAuth2Strategy {
    * @returns The extra parameters.
    */
   public override authorizationParams(
-    options: Record<string, unknown>
-  ): Record<string, unknown> {
-    const params: Record<string, unknown> = super.authorizationParams(
-      options
-    ) as Record<string, unknown>;
+    options: AuthorizationParams
+  ): AuthorizationParams & Record<string, unknown> {
+    const params: AuthorizationParams & Record<string, unknown> =
+      super.authorizationParams(options) as Record<string, unknown>;
 
     if ('permissions' in options) {
       params.permissions = options.permissions;
