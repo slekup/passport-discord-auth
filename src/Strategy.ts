@@ -1,9 +1,11 @@
+import { Schema } from 'builder-validation';
 import {
   InternalOAuthError,
   Strategy as OAuth2Strategy,
   StrategyOptions as OAuth2StrategyOptions,
   VerifyCallback,
 } from 'passport-oauth2';
+
 import {
   Profile,
   ProfileConnection,
@@ -43,6 +45,62 @@ export class Strategy extends OAuth2Strategy {
    * @throws An `Error`. If the options, especially credentials, are not valid.
    */
   public constructor(options: StrategyOptions, verify: VerifyFunction) {
+    const constructorSchema = new Schema()
+      .addString({
+        name: 'clientId',
+        description: 'The client ID assigned by Discord.',
+        required: true,
+      })
+      .addString({
+        name: 'clientSecret',
+        description: 'The client secret assigned by Discord.',
+        required: true,
+      })
+      .addString({
+        name: 'callbackUrl',
+        description:
+          'The URL to which Discord will redirect the user after granting authorization.',
+        required: true,
+      })
+      .addArray({
+        name: 'scope',
+        description: 'An array of permission scopes to request.',
+        required: true,
+      })
+      .addNumber({
+        name: 'scopeDelay',
+        description:
+          'The delay in milliseconds between requests for the same scope.',
+        required: false,
+      })
+      .addBoolean({
+        name: 'fetchScope',
+        description: 'Whether to fetch data for the specified scope.',
+        required: false,
+      })
+      .addString({
+        name: 'authorizationUrl',
+        description: 'The base URL for OAuth2 authorization.',
+        required: false,
+      })
+      .addString({
+        name: 'tokenUrl',
+        description: 'The base URL for OAuth2 token issuance.',
+        required: false,
+      })
+      .addString({
+        name: 'scopeSeparator',
+        description: 'The separator for the scope values.',
+        required: false,
+      });
+
+    // Validate the constructor against the schema.
+    constructorSchema
+      .validate(options as unknown as Record<string, unknown>)
+      .then((result) => {
+        if (typeof result === 'string') throw new Error(result);
+      });
+
     super(
       {
         clientID: options.clientId,

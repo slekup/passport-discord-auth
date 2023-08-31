@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  builder-validation:
+    specifier: ^0.0.3
+    version: 0.0.3
   passport:
     specifier: ^0.6.0
     version: 0.6.0
@@ -1071,6 +1074,10 @@ packages:
       node-releases: 2.0.13
       update-browserslist-db: 1.0.11(browserslist@4.21.10)
     dev: true
+
+  /builder-validation@0.0.3:
+    resolution: {integrity: sha512-P1Kt82TB9boqQexxO99VJ4YlbbCjPbdbVY4lHbJSCy6dLy34Vh5fvlk2fwMeToteOu4NAPDRvax/ipCfrb3H5w==}
+    dev: false
 
   /builtin-modules@3.3.0:
     resolution: {integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==}
