@@ -182,15 +182,15 @@ export class Strategy extends OAuth2Strategy {
             _json: json as unknown as Record<string, unknown>,
           };
 
-          if (!this.fetchScopeEnabled) return done(null, profile);
+          if (this.fetchScopeEnabled === false) return done(null, profile);
 
           this.fetchScope('connections', accessToken, (err, data) => {
             if (err) return done(err);
-            json.connections = data as ProfileConnection[];
+            profile.connections = data as ProfileConnection[];
             this.fetchScope('guilds', accessToken, (err, data) => {
               if (err) return done(err);
-              json.guilds = data as ProfileGuild[];
-              json.fetchedAt = new Date();
+              profile.guilds = data as ProfileGuild[];
+              profile.fetchedAt = new Date();
               done(null, profile);
             });
           });
@@ -240,7 +240,7 @@ export class Strategy extends OAuth2Strategy {
           }
         }
       );
-    }, this.scopeDelay);
+    }, this.scopeDelay ?? 0);
   }
 
   /**
