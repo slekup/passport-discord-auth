@@ -1,0 +1,15 @@
+{
+  "baseBranches": ["dev"],
+  "labels": ["dependencies"],
+  "assignees": ["slekup"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    }
+  ]
+}
