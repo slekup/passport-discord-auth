@@ -26,6 +26,7 @@ type VerifyFunction = (
 export class Strategy extends OAuth2Strategy {
   public override name = 'discord';
   private scope: ScopeType;
+  private scopeDelay: number;
 
   /**
    * Passport strategy for authenticating with Discord using the OAuth 2.0 API.
@@ -49,6 +50,7 @@ export class Strategy extends OAuth2Strategy {
     );
 
     this.scope = options.scope ?? [];
+    this.scopeDelay = options.scopeDelay ?? 0;
 
     // eslint-disable-next-line no-underscore-dangle
     this._oauth2.useAuthorizationHeaderforGET(true);
@@ -138,29 +140,31 @@ export class Strategy extends OAuth2Strategy {
   ): void {
     if (!this.scope.includes(scope)) return cb(null, null);
 
-    // eslint-disable-next-line no-underscore-dangle
-    this._oauth2.get(
-      `https://discord.com/api/users/@me/${scope}`,
-      accessToken,
-      (err, body) => {
-        if (err)
-          return cb(
-            new InternalOAuthError(`Failed to fetch the scope: ${scope}`, err)
-          );
-
-        try {
-          if (typeof body !== 'string')
+    setTimeout(() => {
+      // eslint-disable-next-line no-underscore-dangle
+      this._oauth2.get(
+        `https://discord.com/api/users/@me/${scope}`,
+        accessToken,
+        (err, body) => {
+          if (err)
             return cb(
-              new Error(`Failed to parse the returned scope data: ${scope}`)
+              new InternalOAuthError(`Failed to fetch the scope: ${scope}`, err)
             );
 
-          const json = JSON.parse(body) as Record<string, unknown>;
-          cb(null, json);
-        } catch (error) {
-          cb(new Error(`Failed to parse the returned scope data: ${scope}`));
+          try {
+            if (typeof body !== 'string')
+              return cb(
+                new Error(`Failed to parse the returned scope data: ${scope}`)
+              );
+
+            const json = JSON.parse(body) as Record<string, unknown>;
+            cb(null, json);
+          } catch (error) {
+            cb(new Error(`Failed to parse the returned scope data: ${scope}`));
+          }
         }
-      }
-    );
+      );
+    }, this.scopeDelay);
   }
 
   /**
@@ -181,6 +185,14 @@ export class Strategy extends OAuth2Strategy {
 
     if ('prompt' in options) {
       params.prompt = options.prompt;
+    }
+
+    if ('disable_guild_select' in options) {
+      params.disable_guild_select = options.disable_guild_select;
+    }
+
+    if ('guild_id' in options) {
+      params.guild_id = options.guild_id;
     }
 
     return params;

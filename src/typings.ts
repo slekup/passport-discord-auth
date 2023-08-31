@@ -144,6 +144,10 @@ export interface StrategyOptions
    */
   scope: ScopeType;
   /**
+   * The delay in milliseconds between requests for the same scope.
+   */
+  scopeDelay: number;
+  /**
    * The base URL for OAuth2 authorization.
    */
   authorizationUrl?: string | undefined;
