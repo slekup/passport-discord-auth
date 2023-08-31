@@ -146,7 +146,11 @@ export interface StrategyOptions
   /**
    * The delay in milliseconds between requests for the same scope.
    */
-  scopeDelay: number;
+  scopeDelay?: number | undefined;
+  /**
+   * Whether to fetch data for the specified scope.
+   */
+  fetchScope?: boolean | undefined;
   /**
    * The base URL for OAuth2 authorization.
    */

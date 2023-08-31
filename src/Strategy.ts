@@ -27,6 +27,7 @@ export class Strategy extends OAuth2Strategy {
   public override name = 'discord';
   private scope: ScopeType;
   private scopeDelay: number;
+  private fetchScopeEnabled: boolean;
 
   /**
    * Passport strategy for authenticating with Discord using the OAuth 2.0 API.
@@ -51,6 +52,7 @@ export class Strategy extends OAuth2Strategy {
 
     this.scope = options.scope ?? [];
     this.scopeDelay = options.scopeDelay ?? 0;
+    this.fetchScopeEnabled = options.fetchScope ?? true;
 
     // eslint-disable-next-line no-underscore-dangle
     this._oauth2.useAuthorizationHeaderforGET(true);
@@ -107,6 +109,8 @@ export class Strategy extends OAuth2Strategy {
             _raw: body,
             _json: json as unknown as Record<string, unknown>,
           };
+
+          if (!this.fetchScopeEnabled) return done(null, profile);
 
           this.fetchScope('connections', accessToken, (err, data) => {
             if (err) return done(err);
