@@ -103,33 +103,31 @@ passport.use(
 
 **Available scopes:**
 
-| Scope (string)                             | Scope (enum)                            | Description                                                                                                                                            |
-| ------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `activities.read`                          | `ActivitiesRead`                        | Allows your app to fetch data from a user's "Now Playing/Recently Played" list — not currently available for apps.                                     |
-| `activities.write`                         | `ActivitiesWrite`                       | Allows your app to update a user's activity - requires Discord approval (NOT REQUIRED FOR GAMESDK ACTIVITY MANAGER).                                   |
-| `applications.builds.read`                 | `ApplicationBuildsRead`                 | Allows your app to read build data for a user's applications.                                                                                          |
-| `applications.builds.upload`               | `ApplicationBuildsUpload`               | Allows your app to upload/update builds for a user's applications - requires Discord approval.                                                         |
-| `applications.commands`                    | `ApplicationsCommands`                  | Allows your app to use commands in a guild.                                                                                                            |
-| `applications.commands.update`             | `ApplicationsCommandsUpdate`            | Allows your app to update its commands using a Bearer token - client credentials grant only.                                                           |
-| `applications.commands.permissions.update` | `ApplicationsCommandsPermissionsUpdate` | Allows your app to update permissions for its commands in a guild a user has permissions to.                                                           |
-| `applications.entitlements`                | `ApplicationsEntitlements`              | Allows your app to read entitlements for a user's applications.                                                                                        |
-| `applications.store.update`                | `ApplicationsStoreUpdate`               | Allows your app to read and update store data (SKUs, store listings, achievements, etc.) for a user's applications.                                    |
-| `bot`                                      | `Bot`                                   | For oauth2 bots, this puts the bot in the user's selected guild by default.                                                                            |
-| `connections`                              | `Connections`                           | Allows /users/@me/connections to return linked third-party accounts.                                                                                   |
-| `dm_channels.read`                         | `DMRead`                                | Allows your app to see information about the user's DMs and group DMs - requires Discord approval.                                                     |
-| `email`                                    | `Email`                                 | Enables /users/@me to return an `email`.                                                                                                               |
-| `gdm.join`                                 | `GdmJoin`                               | Allows your app to join users to a group dm.                                                                                                           |
-| `guilds`                                   | `Guilds`                                | Allows /users/@me/guilds to return basic information about all of a user's guilds.                                                                     |
-| `guilds.join`                              | `GuildsJoin`                            | Allows /guilds/{guild.id}/members/{user.id} to be used for joining users to a guild.                                                                   |
-| `guilds.members.read`                      | `GuildMembersRead`                      | Allows /users/@me/guilds/{guild.id}/member to return a user's member information in a guild.                                                           |
-| `identify`                                 | `Identify`                              | Allows /users/@me without email.                                                                                                                       |
-| `messages.read`                            | `MessagesRead`                          | For local rpc server api access, this allows you to read messages from all client channels (otherwise restricted to channels/guilds your app creates). |
-| `relationships.read`                       | `RelationshipsRead`                     | Allows your app to know a user's friends and implicit relationships - requires Discord approval.                                                       |
-| `role_connections.write`                   | `RoleConnectionsWrite`                  | Allows your app to update a user's connection and metadata for the app.                                                                                |
-| `rpc`                                      | `RPC`                                   | For local rpc server access, this allows you to control a user's local Discord client - requires Discord approval.                                     |
-| `rpc.activities.update`                    | `RPCActivitiesUpdate`                   | For local rpc server access, this allows you to update a user's activity - requires Discord approval.                                                  |
-| `rpc.notifications.read`                   | `RPCNotificationsRead`                  | For local rpc server access, this allows you to receive notifications pushed out to the user - requires Discord approval.                              |
-| `rpc.voice.read`                           | `RPCVoiceRead`                          | For local rpc server access, this allows you to read a user's voice settings and listen for voice events - requires Discord approval.                  |
-| `rpc.voice.write`                          | `RPCVoiceWrite`                         | For local rpc server access, this allows you to update a user's voice settings - requires Discord approval.                                            |
-| `voice`                                    | `Voice`                                 | Allows your app to connect to voice on user's behalf and see all the voice members - requires Discord approval.                                        |
-| `webhook.incoming`                         | `WebhookIncoming`                       | This generates a webhook that is returned in the oauth token response for authorization code grants.                                                   |
+- `Scope.ActivitiesRead` or `activities.read` - Allows your app to fetch data from a user's "Now Playing/Recently Played" list — not currently available for apps.
+- `Scope.ActivitiesWrite` or `activities.write` - Allows your app to update a user's activity - requires Discord approval (NOT REQUIRED FOR GAMESDK ACTIVITY MANAGER).
+- `Scope.ApplicationBuildsRead` or `applications.builds.read` - Allows your app to read build data for a user's applications.
+- `Scope.ApplicationBuildsUpload` or `applications.builds.upload` - Allows your app to upload/update builds for a user's applications - requires Discord approval.
+- `Scope.ApplicationsCommands` or `applications.commands` - Allows your app to use commands in a guild.
+- `Scope.ApplicationsCommandsUpdate` or `applications.commands.update` - Allows your app to update its commands using a Bearer token - client credentials grant only.
+- `Scope.ApplicationsCommandsPermissionsUpdate` or `applications.commands.permissions.update` - Allows your app to update permissions for its commands in a guild a user has permissions to.
+- `Scope.ApplicationsEntitlements` or `applications.entitlements` - Allows your app to read entitlements for a user's applications.
+- `Scope.ApplicationsStoreUpdate` or `applications.store.update` - Allows your app to read and update store data (SKUs, store listings, achievements, etc.) for a user's applications.
+- `Scope.Bot` or `bot` - For oauth2 bots, this puts the bot in the user's selected guild by default.
+- `Scope.Connections` or `connections` - Allows /users/@me/connections to return linked third-party accounts.
+- `Scope.DMRead` or `dm_channels.read` - Allows your app to see information about the user's DMs and group DMs - requires Discord approval.
+- `Scope.Email` or `email` - Enables /users/@me to return an `email`.
+- `Scope.GdmJoin` or `gdm.join` - Allows your app to join users to a group dm.
+- `Scope.Guilds` or `guilds` - Allows /users/@me/guilds to return basic information about all of a user's guilds.
+- `Scope.GuildsJoin` or `guilds.join` - Allows /guilds/{guild.id}/members/{user.id} to be used for joining users to a guild.
+- `Scope.GuildMembersRead` or `guilds.members.read` - Allows /users/@me/guilds/{guild.id}/member to return a user's member information in a guild.
+- `Scope.Identify` or `identify` - Allows /users/@me without email.
+- `Scope.MessagesRead` or `messages.read` - For local rpc server api access, this allows you to read messages from all client channels (otherwise restricted to channels/guilds your app creates).
+- `Scope.RelationshipsRead` or `relationships.read` - Allows your app to know a user's friends and implicit relationships - requires Discord approval.
+- `Scope.RoleConnectionsWrite` or `role_connections.write` - Allows your app to update a user's connection and metadata for the app.
+- `Scope.RPC` or `rpc` - For local rpc server access, this allows you to control a user's local Discord client - requires Discord approval.
+- `Scope.RPCActivitiesUpdate` or `rpc.activities.update` - For local rpc server access, this allows you to update a user's activity - requires Discord approval.
+- `Scope.RPCNotificationsRead` or `rpc.notifications.read` - For local rpc server access, this allows you to receive notifications pushed out to the user - requires Discord approval.
+- `Scope.RPCVoiceRead` or `rpc.voice.read` - For local rpc server access, this allows you to read a user's voice settings and listen for voice events - requires Discord approval.
+- `Scope.RPCVoiceWrite` or `rpc.voice.write` - For local rpc server access, this allows you to update a user's voice settings - requires Discord approval.
+- `Scope.Voice` or `voice` - Allows your app to connect to voice on user's behalf and see all the voice members - requires Discord approval.
+- `Scope.WebhookIncoming` or `webhook.incoming` - This generates a webhook that is returned in the oauth token response for authorization code grants.
