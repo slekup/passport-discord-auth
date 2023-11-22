@@ -8,13 +8,6 @@ rules:
   header-max-length: [2, always, 72]
   header-min-length: [2, always, 10]
   references-empty: [0, never]
-  scope-enum:
-    - 1
-    - always
-    - - config # Configuration related changes.
-      - deps # Dependency related changes.
-      - utils # Utility related changes.
-      - ui # UI related changes.
   scope-case: [2, always, lower-case]
   scope-empty: [0, never]
   scope-max-length: [2, always, 20]

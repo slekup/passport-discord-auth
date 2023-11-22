@@ -1,9 +1,13 @@
 import { Api } from 'express-custom';
 
 import { initializePassportStrategy } from '@services/discordStrategy';
+import databaseConnection from '@utils/databaseConnection';
 import { RequestHandler } from 'express';
 import passport from 'passport';
 import routes from './routes';
+
+// Database connection
+databaseConnection();
 
 // Create the API instance
 const api = new Api({
