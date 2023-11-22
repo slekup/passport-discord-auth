@@ -1,0 +1,42 @@
+{
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
+  "compilerOptions": {
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "outDir": "dist",
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitThis": true,
+    "strictPropertyInitialization": false,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": false,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "importHelpers": false,
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "removeComments": true,
+    "baseUrl": "./",
+    "paths": {
+      "@constants/*": ["src/constants/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@models/*": ["src/models/*"],
+      "@services/*": ["src/services/*"],
+      "@middleware/*": ["src/middleware/*"],
+      "@typings/*": ["src/typings/*"],
+      "@utils/*": ["src/utils/*"]
+    }
+  },
+  "include": ["src", "../../environment.d.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}

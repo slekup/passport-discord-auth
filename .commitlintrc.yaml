@@ -1,0 +1,99 @@
+# yaml-language-server: $schema=https://json.schemastore.org/commitlintrc.json
+parserPreset: conventional-changelog-conventionalcommits
+extends:
+  - '@commitlint/config-angular'
+rules:
+  header-case: [2, always, lower-case]
+  header-full-stop: [2, never, .]
+  header-max-length: [2, always, 72]
+  header-min-length: [2, always, 10]
+  references-empty: [0, never]
+  scope-enum:
+    - 1
+    - always
+    - - config # Configuration related changes.
+      - deps # Dependency related changes.
+      - utils # Utility related changes.
+      - ui # UI related changes.
+  scope-case: [2, always, lower-case]
+  scope-empty: [0, never]
+  scope-max-length: [2, always, 20]
+  scope-min-length: [2, always, 2]
+  subject-empty: [2, never]
+  subject-max-length: [2, always, 72]
+  subject-min-length: [2, always, 10]
+  subject-exclamation-mark: [2, never]
+  type-enum:
+    - 2
+    - always
+    - - build # Changes that affect the build system or external dependencies.
+      - chore # Regular code maintenance.
+      - ci # Changes to our CI configuration files and scripts.
+      - docs # Documentation only changes.
+      - feat # A new feature.
+      - fix # A bug fix.
+      - perf # A code change that improves performance.
+      - refactor # A code change that neither fixes a bug nor adds a feature.
+      - revert # Reverts a previous commit.
+      - style # Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc).
+      - test # Adding missing tests or correcting existing tests.
+  type-case: [2, always, lower-case]
+  type-empty: [2, never]
+  type-max-length: [2, always, 10]
+  type-min-length: [2, always, 2]
+prompt:
+  messages:
+    skip: :skip
+    max: upper %d chars
+    min: lower %d chars
+    emptyWarning: can not be empty
+    upperLimitWarning: upper limit is %d chars
+    lowerLimitWarning: lower limit is %d chars
+  questions:
+    type:
+      description: "Select the type of change you're commiting"
+      enum:
+        build:
+          description: Changes that affect the build system or external dependencies
+          title: Build System
+          emoji: 🛠
+        chore:
+          description: Regular code maintenance
+          title: Chores
+          emoji: 🧹
+        ci:
+          description: Changes to our CI configuration files and scripts
+          title: CI
+          emoji: ⚙️
+        docs:
+          description: Documentation only changes
+          title: Documentation
+          emoji: 📚
+        feat:
+          description: A new feature
+          title: Features
+          emoji: ✨
+        fix:
+          description: A bug fix
+          title: Bug Fixes
+          emoji: 🐛
+        perf:
+          description: A code change that improves performance
+          title: Performance Improvements
+          emoji: 🚀
+        refactor:
+          description: A code change that neither fixes a bug nor adds a feature
+          title: Code Refactoring
+          emoji: 📦
+        revert:
+          description: Reverts a previous commit
+          title: Reverts
+          emoji: ⏪
+        style:
+          description: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+          title: Styles
+          emoji: 💎
+        test:
+          description: Adding missing tests or correcting existing tests
+          title: Tests
+          emoji: 🧪

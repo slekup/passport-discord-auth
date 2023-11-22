@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://json.schemastore.org/prettierrc
+arrowParens: always
+bracketSpacing: true
+printWidth: 80
+quoteProps: consistent
+semi: true
+singleQuote: true
+tabWidth: 2
+trailingComma: es5
