@@ -5,3 +5,4 @@ out/
 coverage/
 pnpm-lock.yaml
 tsconfig.json
+README.md

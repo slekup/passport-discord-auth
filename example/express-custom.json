@@ -1,0 +1,15 @@
+{
+  "customDocs": [
+    {
+      "basePath": "../docs",
+      "category": "Introduction",
+      "files": ["getting-started"],
+      "slug": "introduction"
+    }
+  ],
+  "description": "An example API for the express-custom package.",
+  "file": "./src/api.ts",
+  "logo": "https://avatars.githubusercontent.com/u/74949101?v=4",
+  "name": "Example API",
+  "output": "./docs"
+}

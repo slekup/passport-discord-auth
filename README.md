@@ -4,7 +4,7 @@
 
 ---
 
-<a href="https://discord.gg/p5rxxQN7DT" target="_blank">Discord</a> • <a href="https://github.com/slekup/passport-discord-auth" target="_blank">GitHub</a>
+<a href="https://github.com/slekup/passport-discord-auth/blob/main/example" target="_blank">Example</a> • <a href="https://discord.gg/p5rxxQN7DT" target="_blank">Discord</a> • <a href="https://github.com/slekup/passport-discord-auth" target="_blank">GitHub</a> • <a href="https://npmjs.org/package/passport-discord-auth" target="_blank">NPM</a>
 
 ---
 
