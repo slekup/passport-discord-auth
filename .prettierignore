@@ -1,0 +1,32 @@
+# Dependencies
+**/node_modules
+
+# Logs
+**/logs
+**/*.log
+**/npm-debug.log*
+
+# Testing
+**/coverage
+
+# Dist
+**/dist/
+**/build/
+
+# Cache
+tmp/
+.prettiercache
+.eslintcache
+
+# Miscellaneous
+**/.tmp
+**/.idea
+**/.DS_Store
+**/tsup.config.bundled*
+
+# Prettier specific
+**/.husky/
+**/.git/
+**/.github/
+**/pnpm-lock.yaml
+**/tsup.config.bundled*
