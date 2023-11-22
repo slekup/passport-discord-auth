@@ -14,6 +14,7 @@
     "express": "^4.18.2",
     "express-custom": "^0.1.11",
     "mongoose": "^8.0.1",
+    "passport": "^0.6.0",
     "passport-discord-auth": "workspace:*",
     "passport-oauth2-refresh": "^2.2.0"
   },
