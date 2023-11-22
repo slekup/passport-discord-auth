@@ -81,6 +81,9 @@ importers:
       mongoose:
         specifier: ^8.0.1
         version: 8.0.1
+      passport:
+        specifier: ^0.6.0
+        version: 0.6.0
       passport-discord-auth:
         specifier: workspace:*
         version: link:..
