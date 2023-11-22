@@ -22,7 +22,7 @@ export enum Scope {
    */
   ApplicationBuildsUpload = 'applications.builds.upload',
   /**
-   *	Allows your app to use commands in a guild.
+   * Allows your app to use commands in a guild.
    */
   ApplicationsCommands = 'applications.commands',
   /**
@@ -789,7 +789,7 @@ export interface ProfileGuild {
    */
   approximate_presence_count?: number | undefined;
   /**
-   *	The welcome screen of a Community guild, shown to new members, returned in an Invite's guild object.
+   * The welcome screen of a Community guild, shown to new members, returned in an Invite's guild object.
    */
   welcome_screen?: DiscordWelcomeScreen | undefined;
   /**

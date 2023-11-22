@@ -36,30 +36,19 @@
     "dev": "rimraf dist && tsup --watch",
     "format": "prettier --write \"src/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\"",
-    "lint": "eslint src/**/* --ext .ts && tsc --noEmit",
-    "lint:fix": "eslint --fix src/**/* --ext .ts && tsc --noEmit"
+    "lint": "eslint src/**/*",
+    "lint:fix": "eslint src/**/* --fix"
   },
   "dependencies": {
     "builder-validation": "^0.0.3",
     "passport": "^0.6.0",
-    "passport-oauth": "^1.0.0",
-    "passport-oauth2": "^1.7.0",
-    "util": "^0.12.5"
+    "passport-oauth2": "^1.7.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.3",
     "@types/passport": "^1.0.16",
     "@types/passport-oauth2": "^1.4.15",
-    "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "@typescript-eslint/parser": "^6.12.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-jsdoc": "^46.9.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-tsdoc": "^0.2.17",
+    "eslint-config-slekup": "^1.0.12",
     "nodemon": "^3.0.1",
     "prettier": "^3.1.0",
     "rimraf": "^5.0.5",
