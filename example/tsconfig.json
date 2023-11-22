@@ -18,22 +18,25 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "noEmitOnError": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": false,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "importHelpers": true,
-    "noEmit": false,
+    "importHelpers": false,
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "removeComments": true,
+    "baseUrl": "./",
     "paths": {
-      "@controllers/*": ["./src/controllers/*"],
-      "@models/*": ["./src/models/*"],
-      "@services/*": ["./src/services/*"]
+      "@constants/*": ["src/constants/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@models/*": ["src/models/*"],
+      "@services/*": ["src/services/*"],
+      "@middleware/*": ["src/middleware/*"],
+      "@typings/*": ["src/typings/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
-  "include": ["src/**/*", "environment.d.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src", "../../environment.d.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
