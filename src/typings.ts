@@ -1,5 +1,5 @@
 import passport from 'passport';
-import { StrategyOptions as OAuth2StrategyOptions } from 'passport-oauth2';
+import { StrategyOptions as OAuth2StrategyOptions, StrategyOptionsWithRequest as OAuth2StrategyOptionsWithRequest } from 'passport-oauth2';
 
 /**
  * See https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes for more information.
@@ -122,9 +122,13 @@ export enum Scope {
 export type SingleScopeType = `${Scope}`;
 export type ScopeType = SingleScopeType[];
 
+export interface MergedOAuth2StrategyOptions extends OAuth2StrategyOptions, OAuth2StrategyOptionsWithRequest {
+  
+}
+
 export interface StrategyOptions
   extends Omit<
-    OAuth2StrategyOptions,
+    MergedOAuth2StrategyOptions,
     'clientID' | 'clientSecret' | 'scope' | 'authorizationURL' | 'tokenURL'
   > {
   /**
