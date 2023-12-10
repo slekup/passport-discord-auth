@@ -122,9 +122,7 @@ export enum Scope {
 export type SingleScopeType = `${Scope}`;
 export type ScopeType = SingleScopeType[];
 
-export interface MergedOAuth2StrategyOptions extends OAuth2StrategyOptions, OAuth2StrategyOptionsWithRequest {
-  
-}
+type MergedOAuth2StrategyOptions = OAuth2StrategyOptions | OAuth2StrategyOptionsWithRequest
 
 export interface StrategyOptions
   extends Omit<
