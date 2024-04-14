@@ -1,8 +1,10 @@
 import { Api } from 'express-custom';
+import { RequestHandler } from 'express';
+
+import 'dotenv/config';
 
 import { initializePassportStrategy } from '@services/discordStrategy';
 import databaseConnection from '@utils/databaseConnection';
-import { RequestHandler } from 'express';
 import passport from 'passport';
 import routes from './routes';
 

@@ -60,8 +60,8 @@ passport.use(
       callbackURL: 'http://localhost:3000/auth/discord/callback',
       scope: ['identify', 'guilds'],
     },
+    // Do something with the profile
     (accessToken, refreshToken, profile, done) => {
-      // Do something with the profile
       done(null, profile);
     }
   )
