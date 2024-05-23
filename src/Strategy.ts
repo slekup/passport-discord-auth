@@ -146,7 +146,9 @@ export class Strategy extends OAuth2Strategy {
         let profile: Profile = {} as Profile;
 
         try {
-          if (typeof body !== 'string') return done(new Error('Failed to parse the user profile.'));
+          if (typeof body !== 'string') {
+            return done(new Error('Failed to parse the user profile.'));
+          }
 
           const json = JSON.parse(body) as Profile;
 
@@ -222,17 +224,17 @@ export class Strategy extends OAuth2Strategy {
         accessToken,
         (err, body) => {
           if (err) {
- return cb(
+            return cb(
               new InternalOAuthError(`Failed to fetch the scope: ${scope}`, err)
             );
-}
+          }
 
           try {
             if (typeof body !== 'string') {
- return cb(
+              return cb(
                 new Error(`Failed to parse the returned scope data: ${scope}`)
               );
-}
+            }
 
             const json = JSON.parse(body) as Record<string, unknown>;
             cb(null, json);

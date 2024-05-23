@@ -4,6 +4,6 @@ extends:
 parserOptions:
   project:
     - './tsconfig.json'
-    - './example/tsconfig.json'
+    # - './example/tsconfig.json'
 rules:
   'no-console': 'off'

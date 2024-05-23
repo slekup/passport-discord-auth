@@ -55,13 +55,13 @@ passport.deserializeUser((user, done) => {
 passport.use(
   new Strategy(
     {
-      clientID: 'CLIENT_ID',
+      clientId: 'CLIENT_ID',
       clientSecret: 'CLIENT_SECRET',
-      callbackURL: 'http://localhost:3000/auth/discord/callback',
+      callbackUrl: 'http://localhost:3000/auth/discord/callback',
       scope: ['identify', 'guilds'],
     },
+    // Do something with the profile
     (accessToken, refreshToken, profile, done) => {
-      // Do something with the profile
       done(null, profile);
     }
   )
