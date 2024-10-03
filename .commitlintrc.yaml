@@ -3,23 +3,59 @@ parserPreset: conventional-changelog-conventionalcommits
 extends:
   - '@commitlint/config-angular'
 rules:
-  header-case: [2, always, lower-case]
-  header-full-stop: [2, never, .]
-  header-max-length: [2, always, 72]
-  header-min-length: [2, always, 10]
-  references-empty: [0, never]
-  scope-case: [2, always, lower-case]
-  scope-empty: [0, never]
-  scope-max-length: [2, always, 20]
-  scope-min-length: [2, always, 2]
-  subject-empty: [2, never]
-  subject-max-length: [2, always, 72]
-  subject-min-length: [2, always, 10]
-  subject-exclamation-mark: [2, never]
+  header-case:
+    - 2
+    - always
+    - lower-case
+  header-full-stop:
+    - 2
+    - never
+    - .
+  header-max-length:
+    - 2
+    - always
+    - 72
+  header-min-length:
+    - 2
+    - always
+    - 10
+  references-empty:
+    - 0
+    - never
+  scope-case:
+    - 2
+    - always
+    - lower-case
+  scope-empty:
+    - 0
+    - never
+  scope-max-length:
+    - 2
+    - always
+    - 20
+  scope-min-length:
+    - 2
+    - always
+    - 2
+  subject-empty:
+    - 2
+    - never
+  subject-max-length:
+    - 2
+    - always
+    - 72
+  subject-min-length:
+    - 2
+    - always
+    - 10
+  subject-exclamation-mark:
+    - 2
+    - never
   type-enum:
     - 2
     - always
-    - - build # Changes that affect the build system or external dependencies.
+    -
+      - build # Changes that affect the build system or external dependencies.
       - chore # Regular code maintenance.
       - ci # Changes to our CI configuration files and scripts.
       - docs # Documentation only changes.
@@ -30,10 +66,21 @@ rules:
       - revert # Reverts a previous commit.
       - style # Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc).
       - test # Adding missing tests or correcting existing tests.
-  type-case: [2, always, lower-case]
-  type-empty: [2, never]
-  type-max-length: [2, always, 10]
-  type-min-length: [2, always, 2]
+  type-case:
+    - 2
+    - always
+    - lower-case
+  type-empty:
+    - 2
+    - never
+  type-max-length:
+    - 2
+    - always
+    - 10
+  type-min-length:
+    - 2
+    - always
+    - 2
 prompt:
   messages:
     skip: :skip

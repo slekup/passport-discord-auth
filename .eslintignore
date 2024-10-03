@@ -1,8 +1,0 @@
-node_modules/
-build/
-dist/
-out/
-coverage/
-pnpm-lock.yaml
-tsconfig.json
-README.md

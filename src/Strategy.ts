@@ -119,7 +119,6 @@ export class Strategy extends OAuth2Strategy {
     this.scopeDelay = options.scopeDelay ?? 0;
     this.fetchScopeEnabled = options.fetchScope ?? true;
 
-    // eslint-disable-next-line no-underscore-dangle
     this._oauth2.useAuthorizationHeaderforGET(true);
   }
 
@@ -132,7 +131,6 @@ export class Strategy extends OAuth2Strategy {
     accessToken: string,
     done: (err?: Error | null, profile?: Profile | null) => void
   ): void {
-    // eslint-disable-next-line no-underscore-dangle
     this._oauth2.get(
       'https://discord.com/api/users/@me',
       accessToken,
@@ -156,7 +154,7 @@ export class Strategy extends OAuth2Strategy {
           const EPOCH = 1420070400000;
 
           // Date is bits 22-63
-          const SHIFT = 1 << 22; // eslint-disable-line no-bitwise
+          const SHIFT = 1 << 22;
 
           profile = {
             provider: 'discord',
@@ -196,6 +194,7 @@ export class Strategy extends OAuth2Strategy {
             });
           });
         } catch (err) {
+          console.error(err);
           return done(new Error('Failed to parse the user profile.'));
         }
       }
@@ -218,7 +217,6 @@ export class Strategy extends OAuth2Strategy {
     if (!this.scope.includes(scope)) return cb(null, null);
 
     setTimeout(() => {
-      // eslint-disable-next-line no-underscore-dangle
       this._oauth2.get(
         `https://discord.com/api/users/@me/${scope}`,
         accessToken,
@@ -238,7 +236,8 @@ export class Strategy extends OAuth2Strategy {
 
             const json = JSON.parse(body) as Record<string, unknown>;
             cb(null, json);
-          } catch (error) {
+          } catch (err) {
+            console.error(err);
             cb(new Error(`Failed to parse the returned scope data: ${scope}`));
           }
         }
