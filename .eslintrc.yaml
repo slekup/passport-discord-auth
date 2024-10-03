@@ -1,6 +1,0 @@
-# yaml-language-server: $schema=https://json.schemastore.org/eslintrc.json
-extends:
-  - 'slekup'
-parserOptions:
-  project: ./tsconfig.json
-root: true
