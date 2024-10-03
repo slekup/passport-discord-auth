@@ -79,6 +79,18 @@ app.get(
 );
 ```
 
+**Example endpoint that returns the authenticated user:**
+
+```ts
+app.get('/user', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json(req.user);
+  } else {
+    res.status(401).json({ message: 'Unauthorized' });
+  }
+});
+```
+
 ### Scope
 
 You can choose to import the `Scope` enum and use it to specify the scopes you want to request from the user or you can use the string literals.
