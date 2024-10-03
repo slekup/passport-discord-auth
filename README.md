@@ -114,7 +114,7 @@ passport.use(
 - `Scope.ApplicationsStoreUpdate` or `applications.store.update` - Allows your app to read and update store data (SKUs, store listings, achievements, etc.) for a user's applications.
 - `Scope.Bot` or `bot` - For oauth2 bots, this puts the bot in the user's selected guild by default.
 - `Scope.Connections` or `connections` - Allows /users/@me/connections to return linked third-party accounts.
-- `Scope.DMRead` or `dm_channels.read` - Allows your app to see information about the user's DMs and group DMs - requires Discord approval.
+- `Scope.DmRead` or `dm_channels.read` - Allows your app to see information about the user's DMs and group DMs - requires Discord approval.
 - `Scope.Email` or `email` - Enables /users/@me to return an `email`.
 - `Scope.GdmJoin` or `gdm.join` - Allows your app to join users to a group dm.
 - `Scope.Guilds` or `guilds` - Allows /users/@me/guilds to return basic information about all of a user's guilds.
@@ -124,10 +124,10 @@ passport.use(
 - `Scope.MessagesRead` or `messages.read` - For local rpc server api access, this allows you to read messages from all client channels (otherwise restricted to channels/guilds your app creates).
 - `Scope.RelationshipsRead` or `relationships.read` - Allows your app to know a user's friends and implicit relationships - requires Discord approval.
 - `Scope.RoleConnectionsWrite` or `role_connections.write` - Allows your app to update a user's connection and metadata for the app.
-- `Scope.RPC` or `rpc` - For local rpc server access, this allows you to control a user's local Discord client - requires Discord approval.
-- `Scope.RPCActivitiesUpdate` or `rpc.activities.update` - For local rpc server access, this allows you to update a user's activity - requires Discord approval.
-- `Scope.RPCNotificationsRead` or `rpc.notifications.read` - For local rpc server access, this allows you to receive notifications pushed out to the user - requires Discord approval.
-- `Scope.RPCVoiceRead` or `rpc.voice.read` - For local rpc server access, this allows you to read a user's voice settings and listen for voice events - requires Discord approval.
-- `Scope.RPCVoiceWrite` or `rpc.voice.write` - For local rpc server access, this allows you to update a user's voice settings - requires Discord approval.
+- `Scope.Rpc` or `rpc` - For local rpc server access, this allows you to control a user's local Discord client - requires Discord approval.
+- `Scope.RpcActivitiesUpdate` or `rpc.activities.update` - For local rpc server access, this allows you to update a user's activity - requires Discord approval.
+- `Scope.RpcNotificationsRead` or `rpc.notifications.read` - For local rpc server access, this allows you to receive notifications pushed out to the user - requires Discord approval.
+- `Scope.RpcVoiceRead` or `rpc.voice.read` - For local rpc server access, this allows you to read a user's voice settings and listen for voice events - requires Discord approval.
+- `Scope.RpcVoiceWrite` or `rpc.voice.write` - For local rpc server access, this allows you to update a user's voice settings - requires Discord approval.
 - `Scope.Voice` or `voice` - Allows your app to connect to voice on user's behalf and see all the voice members - requires Discord approval.
 - `Scope.WebhookIncoming` or `webhook.incoming` - This generates a webhook that is returned in the oauth token response for authorization code grants.
