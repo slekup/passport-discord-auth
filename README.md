@@ -10,16 +10,13 @@
 
 An updated passport authentication strategy for Discord.
 
-[![Discord Server](https://img.shields.io/discord/1028009131073880104?color=5865F2&logo=discord&logoColor=white)](https://discord.gg/p5rxxQN7DT)
 ![NPM Version](https://img.shields.io/npm/v/passport-discord-auth.svg) ![NPM Downloads](https://img.shields.io/npm/dt/passport-discord-auth) ![Test Status](https://github.com/slekup/passport-discord-auth/actions/workflows/tests.yml/badge.svg) ![NPM Size](https://img.shields.io/bundlephobia/min/passport-discord-auth)
 
 </div>
 
 ---
 
-Passport strategy for authenticating with Discord using the OAuth 2.0 API. This library lets you authenticate using Discord in your Node.js applications. By plugging into Passport, Discord authentication can be easily and unobtrusively integrated into any application or framework that supports Connect-style middleware, including Express.
-
-> **Note:** Feel free to open an issue if you have any questions or need help with anything.
+Passport strategy for authenticating with Discord using the OAuth 2.0 API.
 
 ## Installation
 
@@ -116,7 +113,7 @@ passport.use(
 **Available scopes:**
 
 - `Scope.ActivitiesRead` or `activities.read` - Allows your app to fetch data from a user's "Now Playing/Recently Played" list — not currently available for apps.
-- `Scope.ActivitiesWrite` or `activities.write` - Allows your app to update a user's activity - requires Discord approval (NOT REQUIRED FOR GAMESDK ACTIVITY MANAGER).
+- `Scope.ActivitiesWrite` or `activities.write` - Allows your app to update a user's activity - not currently available for apps (NOT REQUIRED FOR [GAMESDK ACTIVITY MANAGER](https://discord.com/developers/docs/developer-tools/game-sdk#activities)).
 - `Scope.ApplicationBuildsRead` or `applications.builds.read` - Allows your app to read build data for a user's applications.
 - `Scope.ApplicationBuildsUpload` or `applications.builds.upload` - Allows your app to upload/update builds for a user's applications - requires Discord approval.
 - `Scope.ApplicationsCommands` or `applications.commands` - Allows your app to use commands in a guild.
