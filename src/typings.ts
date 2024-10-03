@@ -172,6 +172,9 @@ export interface StrategyOptions
   scopeSeparator?: string | undefined;
 }
 
+/**
+ * See https://discord.com/developers/docs/resources/user#user-object for more information.
+ */
 export interface DiscordUser {
   /**
    * The user's Discord ID.
@@ -181,18 +184,17 @@ export interface DiscordUser {
    */
   id: string;
   /**
-   * The user's username, unique across the platform.
+   * The user's username, not unique across the platform.
    * Required scope: `identify`.
    * @see https://discord.com/developers/docs/resources/user#user-object-user-structure
    * @example 'slekup'
    */
-
   username: string;
   /**
    * The user's 4-digit discord-tag.This is currently being replaced by the pomelo username system.
    * Required scope: `identify`.
    * @see https://discord.com/developers/docs/resources/user#user-object-user-structure
-   * @example 'slekup#6682'
+   * @example 'slekup'
    */
   discriminator?: string | undefined; // TODO: Remove this when Discord removes it from their API.
   /**
@@ -237,13 +239,6 @@ export interface DiscordUser {
    * @example 'a_6de1eeba36e97e2cf9e2fgb1ae99c2b3'
    */
   banner?: string | undefined;
-  /**
-   * The user's banner color encoded as an integer representation of hexadecimal color code.
-   * Required scope: `identify`.
-   * @see https://discord.com/developers/docs/reference#image-formatting
-   * @example 0
-   */
-  banner_color?: number | undefined;
   /**
    * The user's banner color encoded as an integer representation of hexadecimal color code.
    * Required scope: `identify`.
@@ -294,12 +289,24 @@ export interface DiscordUser {
    */
   public_flags?: number | undefined;
   /**
-   * The user's avatar decoration hash.
+   * Data for the user's avatar decoration.
    * Required scope: `identify`.
-   * @see https://discord.com/developers/docs/reference#image-formatting
-   * @example 'a_6de1eeba46e97e2ca9e2fgb1ae99c2b6'
+   * @see https://discord.com/developers/docs/resources/user#avatar-decoration-data-object
    */
-  avatar_decoration?: string | undefined;
+  avatar_decoration_data?: AvatarDecorationData | undefined;
+}
+
+export interface AvatarDecorationData {
+  /**
+   * The [avatar decoration hash](https://discord.com/developers/docs/reference#image-formatting).
+   */
+  asset: string;
+  /**
+   * ID of the avatar decoration's SKU.
+   * @see https://discord.com/developers/docs/reference#snowflakes
+   * @example '896657711104667719'
+   */
+  sku_id: string;
 }
 
 export interface DiscordAccount {
@@ -675,7 +682,7 @@ export interface ProfileGuild {
    */
   owner_id: string;
   /**
-   * The permissions of the user in the guild (excludes overwrites and implicit permissiosn).
+   * The permissions of the user in the guild (excludes overwrites and implicit permissions).
    */
   permissions?: string | undefined;
   /**
