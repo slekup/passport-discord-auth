@@ -330,7 +330,7 @@ export interface DiscordApplication {
    */
   name: string;
   /**
-   * The icon hash of the application.
+   * The icon [hash](https://discord.com/developers/docs/reference#image-formatting) of the application.
    */
   icon?: string | undefined;
   /**
@@ -420,7 +420,7 @@ export interface ProfileConnection {
    */
   name: string;
   /**
-   * The service of the connection (twitch, youtube).
+   * The [service](https://discord.com/developers/docs/resources/user#connection-object-services) of the connection (twitch, youtube).
    */
   type: string;
   /**
@@ -428,7 +428,7 @@ export interface ProfileConnection {
    */
   revoked?: boolean | undefined;
   /**
-   * An array of partial server integrations.
+   * An array of partial [server integrations](https://discord.com/developers/docs/resources/guild#integration-object).
    */
   integrations?: DiscordIntegration[] | undefined;
   /**
@@ -444,11 +444,11 @@ export interface ProfileConnection {
    */
   show_activity: boolean;
   /**
-   * Visibility of this connection.
+   * Whether this connection has a corresponding third party OAuth2 token.
    */
   two_way_link: boolean;
   /**
-   * The visibility of this connection.
+   * The [visibility](https://discord.com/developers/docs/resources/user#connection-object-visibility-types) of this connection.
    */
   visibility: number;
 }
